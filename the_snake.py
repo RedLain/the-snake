@@ -127,8 +127,8 @@ class Apple(GameObject):
     def randomize_position(self, occupied_cells=None):
         """Устанавливает случайную позицию яблока на игровом поле.
 
-        Координаты генерируются в пределах игрового поля с учетом размера сетки.
-        Яблоко не появляется в занятых клетках.
+        Координаты генерируются в пределах игрового поля
+        с учетом размера сетки. Яблоко не появляется в занятых клетках.
 
         Args:
             occupied_cells: Множество занятых клеток (позиций змейки).
@@ -196,14 +196,17 @@ class Snake(GameObject):
 
         self.positions.insert(0, new_head)
 
-        # Тернарный оператор для сохранения последнего сегмента
-        self.last = self.positions.pop() if len(self.positions) > self.length else None
+        if len(self.positions) > self.length:
+            self.last = self.positions.pop()
+        else:
+            self.last = None
 
     def update_direction(self, new_direction=None):
         """Обновляет текущее направление движения.
 
         Args:
-            new_direction: Новое направление движения. Если None - ничего не меняется.
+            new_direction: Новое направление движения.
+            Если None - ничего не меняется.
         """
         if new_direction:
             self.direction = new_direction
@@ -267,9 +270,10 @@ def handle_keys(snake):
             }
 
             new_direction = key_to_direction.get(event.key)
-            
+
             # Проверяем, что новое направление не противоположно текущему
-            if new_direction and new_direction != opposite_directions.get(snake.direction):
+            opposite = opposite_directions.get(snake.direction)
+            if new_direction and new_direction != opposite:
                 snake.update_direction(new_direction)
 
 
