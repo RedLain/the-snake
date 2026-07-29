@@ -103,8 +103,8 @@ class GameObject:
         Должен быть переопределен в дочерних классах.
         """
         raise NotImplementedError(
-            "Метод draw() должен быть переопределен"
-            f"в классе {self.__class__.__name__}"
+            'Метод draw() должен быть переопределен'
+            f'в классе {self.__class__.__name__}'
         )
 
 
@@ -250,7 +250,7 @@ def handle_keys(snake):
     for event in pg.event.get():
         if event.type == pg.QUIT:
             pg.quit()
-            raise SystemExit("Игрок закрыл окно игры")
+            raise SystemExit('Игрок закрыл окно игры')
 
         if event.type == pg.KEYDOWN:
             # Словарь для сопоставления клавиш и направлений
